@@ -1,0 +1,89 @@
+class Habit():
+    #Class representing a habit with properties like name, frequency,state and an id.
+    def __init__(self, id, name, frequency,state, streak, history, longest_streak, last_done, last_check, fulfilled, failed):
+        self.id = id
+        self.name = name
+        self.frequency = frequency
+        self.state = state
+        self.streak = streak
+        self.history = history
+        self.longest_streak = longest_streak
+        self.last_done = last_done
+        self.fulfilled = fulfilled
+        self.failed = failed
+        self.last_check = last_check
+
+    #get functions of habit class
+
+    def get_id(self):
+        return self.id
+
+    def get_state(self):
+        return self.state
+
+    def get_name(self):
+        return self.name
+
+    def get_streak(self):
+        return self.streak
+
+    def get_history(self):
+        return self.history
+
+    def get_frequency(self):
+        return self.frequency
+
+    def get_longest_streak(self):
+        return self.longest_streak
+
+    def get_last_done(self):
+        if self.fulfilled == 0:
+            return "never done"
+        else:
+            return self.last_done
+
+    def get_last_check(self):
+        return self.last_check
+    def get_failed(self):
+        return self.failed
+
+    def get_fulfilled(self):
+        return self.fulfilled
+
+    #functions to change properties of habit objects
+
+    def complete_habit(self, date):
+        self.state = True
+        self.add_streak()
+        self.update_history(True)
+        self.fulfilled += 1
+        self.last_done = date
+
+    def update_habit(self):
+        if self.state:
+            self.state = False
+        else:
+            self.update_history(False)
+            self.failed +=1
+            self.reset_streak()
+
+    def reset_streak(self):
+        self.streak = 0
+
+    def add_streak(self):
+        self.streak += 1
+        if self.streak > self.longest_streak:
+            self.longest_streak = self.streak
+
+    def change_name(self, name):
+        self.name = name
+
+    def change_frequency(self, frequency):
+        self.frequency = frequency
+
+    def update_history(self, done):
+        self.history.pop(0)
+        if done == True:
+            self.history.append("X")
+        else:
+            self.history.append(0)
