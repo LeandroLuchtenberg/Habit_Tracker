@@ -26,7 +26,7 @@ class Habit_Tracker():
 
         self.habit_list = []
         self.id_list = []
-        self.login_screen()
+
 
     def get_habit_list(self):
         return self.habit_list

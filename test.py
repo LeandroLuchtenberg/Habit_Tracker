@@ -134,7 +134,7 @@ class Testhabittracker(unittest.TestCase):
         analyse.show_streaks(self.tracker.get_habit_list())
         analyse.show_longest_streaks(self.tracker.get_habit_list())
         analyse.show_habits_by_periodicity(self.tracker.get_habit_list())
-        print("all analysing tolls are working")
+        print("all analysing tools are working")
 
 
 
