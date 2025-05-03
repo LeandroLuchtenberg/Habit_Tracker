@@ -381,7 +381,6 @@ class Habit_Tracker():
             if row[8] == "never done":
                 last_done = last_check
             else:
-                print(row[8])
                 last_done = datetime.datetime.strptime(row[8], '%Y-%m-%d')
                 last_done = datetime.datetime(last_done.year, last_done.month, last_done.day).date()
 
@@ -443,14 +442,21 @@ class Habit_Tracker():
         self.conn.commit()
         print(
             f"Your username is '{x}' and your password is '{y}'\ndont forget them you need them everytime you want to login")
-        self.login_screen()
+        self.login(x, y)
 
     def login_screen(self):
-        x = input("What do you want to do? \n1. Login \n2. Register \n3. Close App\n")
-        match x:
-            case "1":
-                self.login()
-            case "2":
-                self.register()
-            case "3":
-                quit()
+        done = False
+        while not done:
+            x = input("What do you want to do? \n1. Login \n2. Register \n3. Close App\n")
+            match x:
+                case "1":
+                    self.login()
+                    done = True
+                case "2":
+                    self.register()
+                    done = True
+                case "3":
+                    quit()
+
+                case _:
+                    self.wrong_input()
