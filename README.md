@@ -53,7 +53,7 @@ Python 3.7 or later
 
 8. follow the menu to:
    
-   - show all habits and inspect sertainones closer
+   - show all habits and inspect certain ones closer
    - check off habits
    - analyze your habits
    - create, edit or remove Habits  
