@@ -1,6 +1,7 @@
 
 
 def show_habits_by_periodicity(habit_list):
+    """displays all habits that have a given periodicity"""
     done = False
     while not done:
         num = 1
@@ -34,11 +35,13 @@ def show_habits_by_periodicity(habit_list):
 
 
 def show_streaks(habit_list):
+    """displays active streaks of all habits"""
     #lists all habits and there active streaks
     for x in range (0, len(habit_list), 1):
         print(f"{x + 1}.", habit_list[x].get_name(), habit_list[x].get_streak())
 
 def show_problems(habit_list):
+    """displays how often you totally missed your habits from high to low"""
     print("you have missed:")
     temp_list = []
     for x in range(0, len(habit_list), 1):
@@ -52,6 +55,7 @@ def show_problems(habit_list):
         print(f"{z + 1}.", temp_list[z].get_name(), temp_list[z].get_failed())
 
 def show_longest_streaks(habit_list):
+    """displays longest streaks of all habits from longest to shortest"""
     print("the longest you got:")
     temp_list = []
     for x in range(0, len(habit_list), 1):
@@ -65,6 +69,7 @@ def show_longest_streaks(habit_list):
         print(f"{z + 1}.", temp_list[z].get_name(), temp_list[z].get_longest_streak())
 
 def analyse_menu(habit_list):
+    """displays a menu to navigate the analysis modul"""
     x = input("What do you want to do?\n 1. Show active streaks \n 2. show problems \n 3. show longest streaks\n 4. show habits by periodicity\n")
     match x:
         case "1":

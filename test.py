@@ -6,12 +6,12 @@ import datetime
 import analyse
 
 
-#@patch('builtins.input', lambda _: ["1", "1", "1", "1", "drinking"])
 
 
 class Testhabittracker(unittest.TestCase):
 
     def setUp(self):
+        """Sets up a test environment"""
         self.tracker = Habit_Tracker("HabitTrackerTest.db")
         self.tracker.cur.execute("DELETE FROM habits")
         self.tracker.cur.execute("DELETE FROM user")
@@ -19,10 +19,11 @@ class Testhabittracker(unittest.TestCase):
         password = "theFirst"
         date = datetime.datetime.now().date()
         self.tracker.cur.execute(f"INSERT INTO user VALUES (0, '{name}','{password}')")
-        self.tracker.cur.execute(f"INSERT INTO habits VALUES (0,0,'eating', 2, 0, 0, 00000, 0, '{date}', datetime('now'), 0,0)")
+        self.tracker.cur.execute(f"INSERT INTO habits VALUES (0,0,'walking', 1, '10k steps',0, 0, 00000, 0, 'never done', datetime('now'),'2025-04-28','0', 0,0)")
         self.tracker.id_list.append(0)
 
     def test1_register(self):
+        """test the register function"""
         print("\n Test1")
         name = "register"
         password = "theFirst"
@@ -67,16 +68,18 @@ class Testhabittracker(unittest.TestCase):
             self.tracker.login()
 
 
-        self.assertEqual(self.tracker.habit_list[0].get_name(), "eating")
+        self.assertEqual(self.tracker.habit_list[0].get_name(), "walking")
         print("login and loading of habits confirmed ")
 
 
     def test3_create_habit(self):
+        """Tests to create a new habit"""
         print("\n Test3")
 
         name = "drinking"
         frequency = 1
-        self.tracker.create_habit(name, frequency)
+        specification = "2 Liters"
+        self.tracker.create_habit(name, frequency, specification)
 
 
         self.assertEqual(self.tracker.habit_list[0].get_name(), name)
@@ -103,10 +106,12 @@ class Testhabittracker(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['1', "1", "reading"])# 1, 1 is the way to navigate to edit the name of the habit and reading is the new name
     def test5_edit_habit(self, mock_input):
+        """Test the edit habit function """
         print("\n Test5")
         name = "working"
         frequency = 1
-        self.tracker.create_habit(name, frequency)
+        specification = "It"
+        self.tracker.create_habit(name, frequency, specification)
 
         self.tracker.edit_habit()
 
@@ -116,7 +121,8 @@ class Testhabittracker(unittest.TestCase):
         print("\n Test6")
         name = "working"
         frequency = 1
-        self.tracker.create_habit(name, frequency)
+        specification ="It"
+        self.tracker.create_habit(name, frequency, specification)
 
         self.tracker.habit_list[0].complete_habit(datetime.datetime.now().date())
 
@@ -126,6 +132,7 @@ class Testhabittracker(unittest.TestCase):
 
     @patch('builtins.input', return_value="2")
     def test7_analytics(self, mock_input):
+        """tests the analytics menu"""
         print("\n Test7")
         name = ["working", "drinking", "jogging"]
         frequency = [1, 2, 2]
@@ -137,13 +144,6 @@ class Testhabittracker(unittest.TestCase):
         analyse.show_longest_streaks(self.tracker.get_habit_list())
         analyse.show_habits_by_periodicity(self.tracker.get_habit_list())
         print("all analysing tools are working")
-
-
-
-
-
-
-
 
 
 
