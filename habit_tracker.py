@@ -253,7 +253,7 @@ class Habit_Tracker():
                             done = True
                         case y if y == "3":
                             new_spec = input("whats the new specification?\n")
-                            self.habit_list[x - 1].change_name(new_spec)
+                            self.habit_list[x - 1].change_spec(new_spec)
                             done = True
                         case y if y == "4":
                             self.edit_habit()
