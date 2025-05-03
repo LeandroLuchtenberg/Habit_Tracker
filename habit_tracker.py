@@ -422,7 +422,6 @@ class Habit_Tracker():
             self.cur.execute(f"UPDATE habits SET history= {result} WHERE habit_id = {self.habit_list[x].get_id()}")
             self.cur.execute(
                 f"UPDATE habits SET longest_streak= '{self.habit_list[x].get_longest_streak()}' WHERE habit_id = {self.habit_list[x].get_id()}")
-            print(self.habit_list[x].get_last_done())
             self.cur.execute(
                 f"UPDATE habits SET last_done = '{self.habit_list[x].get_last_done()}' WHERE habit_id = {self.habit_list[x].get_id()}")
             self.cur.execute(f"UPDATE habits SET last_check = datetime('now') WHERE habit_id = {self.habit_list[x].get_id()}")
