@@ -24,7 +24,7 @@ class Testhabittracker(unittest.TestCase):
 
     def test1_register(self):
         """test the register function"""
-        print("\n Test1")
+        print("Test1 register")
         name = "register"
         password = "theFirst"
 
@@ -42,7 +42,7 @@ class Testhabittracker(unittest.TestCase):
         self.assertEqual(test[2], password)
 
     def test2_LoginAndLoading(self):
-        print("\n Test2")
+        print("Test2 Log in and Loading")
 
         name = "Test"
         password = "theFirst"
@@ -74,7 +74,7 @@ class Testhabittracker(unittest.TestCase):
 
     def test3_create_habit(self):
         """Tests to create a new habit"""
-        print("\n Test3")
+        print("Test3 creation of habit")
 
         name = "drinking"
         frequency = 1
@@ -88,7 +88,7 @@ class Testhabittracker(unittest.TestCase):
 
     @patch('builtins.input', return_value="1")
     def test4_show_habit(self, mock_input):
-        print("\n Test4")
+        print("Test4 show habit")
         """"
         Setting up habits to take a look at
         """
@@ -107,7 +107,7 @@ class Testhabittracker(unittest.TestCase):
     @patch('builtins.input', side_effect=['1', "1", "reading"])# 1, 1 is the way to navigate to edit the name of the habit and reading is the new name
     def test5_edit_habit(self, mock_input):
         """Test the edit habit function """
-        print("\n Test5")
+        print("Test5 edit habit")
         name = "working"
         frequency = 1
         specification = "It"
@@ -118,7 +118,7 @@ class Testhabittracker(unittest.TestCase):
         self.assertEqual(self.tracker.habit_list[0].get_name(), "reading") # check if it worked replacing the name
 
     def test6_complete_habits(self):
-        print("\n Test6")
+        print("Test6 edit habit and streak function")
         name = "working"
         frequency = 1
         specification ="It"
@@ -133,7 +133,7 @@ class Testhabittracker(unittest.TestCase):
     @patch('builtins.input', return_value="2")
     def test7_analytics(self, mock_input):
         """tests the analytics menu"""
-        print("\n Test7")
+        print("Test7 anaöytics module")
         name = ["working", "drinking", "jogging"]
         frequency = [1, 2, 2]
 
