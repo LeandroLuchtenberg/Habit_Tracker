@@ -375,16 +375,14 @@ class Habit_Tracker():
         loads the habits form the habit table in the database
         """
         data = self.cur.execute(f"SELECT * FROM habits WHERE user_id = {self.id_list[0]}")
-
         for row in data:
-            print(row[9])
             last_check = datetime.datetime.strptime(row[9], '%Y-%m-%d %H:%M:%S')
             last_check = datetime.datetime(last_check.year, last_check.month, last_check.day).date()
             if row[8] == "never done":
                 last_done = last_check
             else:
                 print(row[8])
-                last_done = datetime.datetime.strptime(row[8], '%Y-%m-%d %H:%M:%S')
+                last_done = datetime.datetime.strptime(row[8], '%Y-%m-%d')
                 last_done = datetime.datetime(last_done.year, last_done.month, last_done.day).date()
 
             if row[4] == 1:
@@ -425,6 +423,7 @@ class Habit_Tracker():
             self.cur.execute(f"UPDATE habits SET history= {result} WHERE habit_id = {self.habit_list[x].get_id()}")
             self.cur.execute(
                 f"UPDATE habits SET longest_streak= '{self.habit_list[x].get_longest_streak()}' WHERE habit_id = {self.habit_list[x].get_id()}")
+            print(self.habit_list[x].get_last_done())
             self.cur.execute(
                 f"UPDATE habits SET last_done = '{self.habit_list[x].get_last_done()}' WHERE habit_id = {self.habit_list[x].get_id()}")
             self.cur.execute(f"UPDATE habits SET last_check = datetime('now') WHERE habit_id = {self.habit_list[x].get_id()}")
