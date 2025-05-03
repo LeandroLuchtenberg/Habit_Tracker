@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 from habit_tracker import Habit_Tracker
 from datetime import datetime
+import datetime
 import analyse
 
 
@@ -16,8 +17,9 @@ class Testhabittracker(unittest.TestCase):
         self.tracker.cur.execute("DELETE FROM user")
         name = "Test"
         password = "theFirst"
+        date = datetime.datetime.now().date()
         self.tracker.cur.execute(f"INSERT INTO user VALUES (0, '{name}','{password}')")
-        self.tracker.cur.execute(f"INSERT INTO habits VALUES (0,0,'eating', 2, 0, 0, 00000, 0, datetime('now'), datetime('now'), 0,0)")
+        self.tracker.cur.execute(f"INSERT INTO habits VALUES (0,0,'eating', 2, 0, 0, 00000, 0, '{date}', datetime('now'), 0,0)")
         self.tracker.id_list.append(0)
 
     def test1_register(self):
@@ -116,7 +118,7 @@ class Testhabittracker(unittest.TestCase):
         frequency = 1
         self.tracker.create_habit(name, frequency)
 
-        self.tracker.habit_list[0].complete_habit(datetime.today().date())
+        self.tracker.habit_list[0].complete_habit(datetime.datetime.now().date())
 
         self.assertEqual(self.tracker.habit_list[0].get_state(), 1)
         self.assertEqual(self.tracker.habit_list[0].get_streak(), 1)
